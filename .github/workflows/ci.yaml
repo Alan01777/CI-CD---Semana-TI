@@ -45,6 +45,6 @@ jobs:
 
       - name: Push image
         run: |
-          docker push alan01777/semana-alan01777/semana-nacional-ti:$:{{ steps.generate_sha.outputs.sha }}
-          docker tag alan01777/semana-alan01777/semana-nacional-ti:$:{{ steps.generate_sha.outputs.sha }} alan01777/semana-alan01777/semana-nacional-ti:$:latest
-          docker push alan01777/semana-alan01777/semana-nacional-ti:$:latest
+          docker push alan01777/semana-nacionalTI:${{ steps.generate_sha.outputs.sha }}
+          docker tag alan01777/semana-nacionalTI:${{ steps.generate_sha.outputs.sha }} alan01777/semana-nacionalTI:latest
+          docker push alan01777/semana-nacionalTI:latest
