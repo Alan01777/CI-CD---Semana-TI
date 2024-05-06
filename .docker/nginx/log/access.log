@@ -1,0 +1,5 @@
+172.20.0.1 - - [06/May/2024:00:15:50 +0000] "GET / HTTP/1.1" 500 254 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:125.0) Gecko/20100101 Firefox/125.0"
+172.20.0.1 - - [06/May/2024:00:29:15 +0000] "GET / HTTP/1.1" 500 1054269 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:125.0) Gecko/20100101 Firefox/125.0"
+172.20.0.1 - - [06/May/2024:00:29:15 +0000] "GET /favicon.ico HTTP/1.1" 200 0 "http://localhost:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:125.0) Gecko/20100101 Firefox/125.0"
+172.20.0.1 - - [06/May/2024:00:35:44 +0000] "GET / HTTP/1.1" 200 27551 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:125.0) Gecko/20100101 Firefox/125.0"
+172.20.0.1 - - [06/May/2024:00:35:44 +0000] "GET /favicon.ico HTTP/1.1" 200 0 "http://localhost:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:125.0) Gecko/20100101 Firefox/125.0"

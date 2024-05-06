@@ -17,7 +17,9 @@ services:
       - app-laravel
 
   app:
-    image: alan01777/laravel-php8.2:1.0.0
+    build:
+      context: .
+      dockerfile: .docker/docker_images/dockerfile.laravel
     container_name: app
     restart: always
     working_dir: /var/www/html/app
