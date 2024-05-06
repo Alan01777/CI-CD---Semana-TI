@@ -1,0 +1,22 @@
+name: Build Docker Image
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build Docker Image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Generate sha
+        id: generate_sha
+        run: |
+          SHA=$(echo $GITHUB_SHA | head -c7)
+          echo "SHA=$SHA" >> $GITHUB_OUTPUT
+
+      - name: Build docker image
+        run: |
+          docker build -t alan01777/semana-nacional-ti:${{ steps.generate_sha.outputs.sha }} -f .docker/docker_images/dockerfile.laravel .
