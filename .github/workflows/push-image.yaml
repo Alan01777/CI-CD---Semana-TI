@@ -1,12 +1,15 @@
 name: Push Image
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
   push-image:
     name: Push image
     runs-on: ubuntu-latest
+    needs: generate-sha
     steps:
       - name: Log in to container registry
         uses: docker/login-action@v3
@@ -14,14 +17,8 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Generate sha
-        id: generate_sha
-        run: |
-          SHA=$(echo $GITHUB_SHA | head -c7)
-          echo "SHA=$SHA" >> $GITHUB_OUTPUT
-
       - name: Push image
         run: |
-          docker push alan01777/semana-nacional-ti:${{ steps.generate_sha.outputs.sha }}
-          docker tag alan01777/semana-nacional-ti:${{ steps.generate_sha.outputs.sha }} alan01777/semana-nacional-ti:latest
+          docker push alan01777/semana-nacional-ti:${{ needs.generate-sha.outputs.sha }}
+          docker tag alan01777/semana-nacional-ti:${{ needs.generate-sha.outputs.sha }} alan01777/semana-nacional-ti:latest
           docker push alan01777/semana-nacional-ti:latest

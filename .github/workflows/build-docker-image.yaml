@@ -1,22 +1,17 @@
 name: Build Docker Image
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
-  build:
-    name: Build Docker Image
+  build-docker-image:
+    name: Build Docker image
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Generate sha
-        id: generate_sha
-        run: |
-          SHA=$(echo $GITHUB_SHA | head -c7)
-          echo "SHA=$SHA" >> $GITHUB_OUTPUT
-
-      - name: Build docker image
-        run: |
-          docker build -t alan01777/semana-nacional-ti:${{ steps.generate_sha.outputs.sha }} -f .docker/docker_images/dockerfile.laravel .
+      - name: Build Docker image
+        run: docker build -t alan01777/semana-nacional-ti:${{ needs.generate-sha.outputs.sha }} -f .docker/docker_images/dockerfile.laravel .

@@ -1,0 +1,17 @@
+name: Generate SHA
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  generate-sha:
+    name: Generate SHA
+    runs-on: ubuntu-latest
+    outputs:
+      sha: ${{ steps.set-output.outputs.sha }}
+    steps:
+      - name: Set SHA
+        id: set-output
+        run: echo "::set-output name=sha::$(echo $GITHUB_SHA | head -c7)"
