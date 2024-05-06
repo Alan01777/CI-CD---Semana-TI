@@ -35,7 +35,8 @@ jobs:
 
       - name: Build docker image
         run: |
-          docker build -t alan01777/semana-nacionalTI:{{ steps.generate_sha.outputs.sha }} -f .docker/docker_images/dockerfile.laravel .
+          docker build -t alan01777/semana-nacionalTI:${{ steps.generate_sha.outputs.sha }} -f .docker/docker_images/dockerfile.laravel .
+
 
       - name: Log in to container registry
         uses: docker/login-action@v3
