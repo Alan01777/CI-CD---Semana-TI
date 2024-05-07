@@ -1,14 +1,23 @@
+# Define o nome do fluxo de trabalho como "build"
 name: build
 
+# Define os eventos que acionam o fluxo de trabalho
 on: [push, pull_request]
 
+# Define os trabalhos a serem executados no fluxo de trabalho
 jobs:
+  # Define um trabalho com o nome "Run tests"
   Build:
     name: Run tests
+    # Define o ambiente de execução do trabalho como uma máquina virtual com Ubuntu
     runs-on: ubuntu-latest
+    # Define as etapas (passos) a serem executadas dentro do trabalho
     steps:
+      # Faz o checkout do repositório no ambiente de execução do fluxo de trabalho
       - uses: actions/checkout@v4
 
+      # Utiliza a ação shivammathur/setup-php@v2 para configurar o ambiente PHP
+      # Define a versão do PHP como 8.2 e especifica uma lista de extensões PHP a serem instaladas
       - name: Build PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -16,13 +25,16 @@ jobs:
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv
           coverage: none
 
+      # Executa o comando composer install -n --prefer-dist para instalar as dependências do Composer
       - name: Install dependencies
         run: composer install -n --prefer-dist
 
+      # Copia o arquivo .env.example para .env e gera uma chave de aplicativo Laravel usando php artisan key:generate
       - name: Prepare Laravel Application
         run: |
           cp .env.example .env
           php artisan key:generate
 
+      # Executa o comando php artisan test para executar os testes automatizados da aplicação Laravel
       - name: Run tests
         run: php artisan test
